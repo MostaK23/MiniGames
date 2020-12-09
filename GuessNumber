@@ -1,0 +1,103 @@
+#include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <string>
+#include <chrono>
+
+using namespace std;
+
+int tries = 1;
+
+void Comparation(int inputNumber, int randNumber)
+{
+	bool correctAnswer = false;
+	if (inputNumber == randNumber)
+	{
+		cout << "Поздравляем. Вы победили." << endl;
+		correctAnswer = true;
+		tries = 8;
+	}
+
+	if (inputNumber > randNumber)
+	{
+		cout << "Ваше число больше загаданного." << endl;
+		tries++;
+	}
+
+	if (inputNumber < randNumber)
+	{
+		cout << "Ваше число меньше загаданного." << endl;
+		tries++;
+	}
+
+	if (tries == 8 && correctAnswer == false)
+		cout << "Извините, но вы проиграли. Правилный ответ было число " << randNumber << "." << endl;
+}
+
+bool repeatSession()
+{
+	bool repeat;
+	string choose;
+
+	while (true)
+	{
+		cout << "Хотите сыграть ещё раз?" << endl;
+		cout << "y - да\nn - нет" << endl;
+		cin >> choose;
+		if (choose == "y")
+			return repeat = true;
+		if (choose == "n")
+			return repeat = false;
+
+		cout << "Введите корректное значение!" << endl;
+	}
+	
+}
+
+int inputNumber()
+{
+	int number;
+	while (true)
+	{
+		cin >> number;
+		if (cin.fail())
+		{
+			cout << "Введите число." << endl;
+			cin.clear();
+			cin.ignore(32767, '\n');
+		}
+		else
+		{
+			return number;
+		}
+	}
+		
+}
+
+int main()
+{
+	setlocale(0, "");
+
+	srand(time(0));
+	int randNumber = rand() % 100;
+	int iNumber;
+	bool repeat = true;
+	
+	while (repeat)
+	{
+		tries = 1;
+		cout << "Я загадал число. Попробуй его отгадать. У тебя 7 попыток." << endl;
+		do
+		{
+			cout << "Попытка №" << tries << " : ";
+			iNumber = inputNumber();
+			Comparation(iNumber, randNumber);
+		} while (tries <= 7);
+		
+		repeat = repeatSession();
+	}
+
+	cout << "Спасибо за игру." << endl;
+
+	return 0;
+}
