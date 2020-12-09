@@ -1,0 +1,125 @@
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+
+using namespace std;
+
+bool win;
+int bank = 100;
+int bet;
+
+void drawCards(int size, int card)
+{
+	srand(time(0));
+	int randNum = 1 + rand() % 21;
+	for (int i = 1; i <= size; i++)
+	{
+		if (i == randNum)
+		{
+			cout << "    ";
+		}
+		else
+		{
+			cout << " __  ";
+		}
+	}
+	cout << endl;
+
+	for (int i = 1; i <= size; i++)
+	{
+		if (i == randNum)
+		{
+			cout << " ## ";
+		}
+		else
+		{
+			cout << "|" << setw(2) << i << "|" << " ";
+		}
+	}
+	cout << endl;
+	for (int i = 1; i <= size; i++)
+	{
+		if (i == randNum)
+		{
+			cout << " ## ";
+		}
+		else
+		{
+			cout << "|__| ";
+		}
+	}
+	cout << endl;
+	if (randNum == card)
+	{
+		cout << "Поздравляем вы победили." << endl;
+		bank += bet * 4;
+	}
+	else
+	{
+		cout << "Увы вы проиграли." << endl;
+	}
+}
+
+void drawCards(int size)
+{
+	for (int i = 1; i <= size; i++)
+	{
+		cout << " __  ";
+	}
+	cout << endl;
+
+	for (int i = 1; i <= size; i++)
+	{
+		cout << "|" << setw(2) << i << "|" << " ";		
+	}
+	cout << endl;
+	for (int i = 1; i <= size; i++)
+	{
+		cout << "|__| ";
+	}
+	cout << endl;
+}
+
+void Bank(int &bank, bool win)
+{
+
+	int try_bet;
+	
+	cout << "На вашем счёте осталось " << bank << "$." << endl;
+	cout << "Чтобы играть поставьте ставку. Минимальная ставка 5$." << endl;
+	
+	do
+	{
+		cin >> try_bet;
+		if (try_bet >= 5 && try_bet <= bank)
+		{
+			bet = try_bet;
+			break;
+		}
+	} while (true);
+	bank -= bet;
+	
+	
+}
+
+int main()
+{
+	setlocale(0, "");
+	
+	int size = 21;
+
+	drawCards(size);
+	cout << endl;
+	
+	do
+	{
+		Bank(bank,win);
+		int card = 5;
+		cout << "Введите номер карты: ";
+		cin >> card;
+		drawCards(size, card);
+	} while (true);
+
+
+	return 0;
+}
