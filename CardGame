@@ -4,9 +4,9 @@
 
 using namespace std;
 
-bool win;
 int bank = 100;
 int bet;
+
 
 void drawCards(int size, int card)
 {
@@ -24,7 +24,6 @@ void drawCards(int size, int card)
 		}
 	}
 	cout << endl;
-
 	for (int i = 1; i <= size; i++)
 	{
 		if (i == randNum)
@@ -52,11 +51,11 @@ void drawCards(int size, int card)
 	if (randNum == card)
 	{
 		cout << "Поздравляем вы победили." << endl;
-		bank += bet * 4;
+		bank += bet * 10;
 	}
 	else
 	{
-		cout << "Увы вы проиграли." << endl;
+		cout << "Увы, вы проиграли." << endl;
 	}
 }
 
@@ -80,13 +79,12 @@ void drawCards(int size)
 	cout << endl;
 }
 
-void Bank(int &bank, bool win)
+void Bank(int &bank)
 {
-
 	int try_bet;
 	
 	cout << "На вашем счёте осталось " << bank << "$." << endl;
-	cout << "Чтобы играть поставьте ставку. Минимальная ставка 5$." << endl;
+	cout << "Чтобы играть сделайте ставку:" << endl;
 	
 	do
 	{
@@ -99,27 +97,64 @@ void Bank(int &bank, bool win)
 	} while (true);
 	bank -= bet;
 	
-	
+}
+
+//void Bonus(int number)
+//{
+//	int selection;
+//	cout << "Если вы хотите воспользоваться бонусом нажмите 1." << endl;
+//	cout << "Бонус будет стоить 10$" << endl;
+//	cin >> selection;
+//	if (selection == '1')
+//	{
+//		if (bank >= 10)
+//		{
+//			bank -= 10;
+//			if (number <= 10)
+//			{
+//				cout << "Ваше число меньше или равно десяти." << endl;
+//			}
+//			else
+//			{
+//				cout << "Ваше число больше десяти." << endl;
+//			}
+//		}
+//		else
+//		{
+//			cout << "У вас не хватает средств." << endl;
+//		}
+//	}
+//}
+
+void Greeting()
+{
+	cout << "Привет дорогой гость." << endl;
+	cout << "Вы зашли в моё казино MostakRoyal." << endl;
+	cout << "Правила очень просты: компьютер загадывает число, а вы должны его угадать." << endl;
+	cout << "Но есть одно условие, вы обязаны делать ставки, чтобы играть. Минимальная ставка 5$." << endl;
+	cout << "Для этого мы дарим вам бонус в размере 100$" << endl;
+	cout << "Удачи и приятной игры." << endl;
 }
 
 int main()
 {
 	setlocale(0, "");
 	
-	int size = 21;
-
+	int card;
+	const int size = 21;
+	
+	Greeting();
+	cout << endl;
 	drawCards(size);
 	cout << endl;
-	
+
 	do
 	{
-		Bank(bank,win);
-		int card = 5;
+		Bank(bank);
 		cout << "Введите номер карты: ";
 		cin >> card;
 		drawCards(size, card);
 	} while (true);
-
 
 	return 0;
 }
