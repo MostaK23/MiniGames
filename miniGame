@@ -1,0 +1,163 @@
+#include <iostream>
+#include <iomanip>
+#include <conio.h>
+
+using namespace std;
+
+enum {
+	AttackMonster, AttackNinja
+};
+
+class Enemy
+{
+	protected:
+		int attackPower;
+		int healthPoints;
+	public:
+		void setAttackPower(int a)
+		{
+			attackPower = a;
+		}
+		void setHealthPoints(int hp)
+		{
+			healthPoints = hp;
+		}
+};
+
+class Monster : public Enemy
+{
+	public:
+		void showDamage()
+		{
+			cout << "Monster has " << attackPower << " damage." << endl;
+		}
+		void showHP()
+		{
+			cout << "Monster has " << healthPoints << " hp." << endl;
+		}
+};
+
+class Ninja : public Enemy
+{
+	public:
+		void showDamage()
+		{
+			cout << "Ninja has " << attackPower << " damage." << endl;
+		}
+		void showHp()
+		{
+			cout << "Ninja has " << healthPoints << " hp." << endl;
+		}
+};
+
+class Teammate
+{
+	protected:
+		int attackPower;
+		int armor;
+		int healthPoints;
+	public:
+		void setAttack(int a)
+		{
+			attackPower = a;
+		}
+		void setArmor(int a)
+		{
+			armor = a;
+		}
+		void setHealthPoints(int hp)
+		{
+			healthPoints = hp;
+		}
+};
+
+class MostaK : public Teammate
+{
+	public:
+		void showAttack()
+		{
+			cout << "MostaK has " << attackPower << " damage." << endl;
+		}
+		void showArmor()
+		{
+			cout << "MostaK has " << armor << " armor." << endl;
+		}
+		void showHP()
+		{
+			cout << "Mostak has " << healthPoints << " hp." << endl;
+		}
+};
+
+void drawHero()
+{
+	cout << "    _     " << endl;
+	cout << "   [O] |  " << endl;
+	cout << " ()=#==!  " << endl;
+	cout << "    Y     " << endl;
+	cout << "  _/ \\_  " << endl;
+}
+
+void drawMonster()
+{
+	cout << "   ___   " <<	endl;
+	cout << "  |*_*|  " <<	endl;
+	cout << "   /H\\  " <<	endl;
+	cout << "   _U_   " <<	endl;
+}
+
+void drawNinja()
+{
+	cout << "   __   " << endl;
+	cout << "  |==|  " << endl;
+	cout << "  /WW\\ " << endl;
+	cout << "  _||_  " << endl;
+}
+
+void Logic()
+{
+	char selection;
+	while (true)
+	{
+		if (_kbhit)
+			selection = _getch();
+		cout << "You pressed " << selection << endl;
+	}
+}
+
+
+int main()
+{
+	Ninja n;
+	Monster m;
+	MostaK hero;
+	Enemy* e1 = &n;
+	Enemy* e2 = &m;
+	Teammate* e3 = &hero;
+
+	e1->setAttackPower(10);
+	e1->setHealthPoints(20);
+
+	e2->setAttackPower(12);
+	e2->setHealthPoints(15);
+
+	e3->setAttack(20);
+	e3->setArmor(20);
+	e3->setHealthPoints(100);
+
+	drawHero();
+	hero.showHP();
+	hero.showAttack();
+	hero.showArmor();
+	cout << endl;
+	drawMonster();
+	m.showDamage();
+	m.showHP();
+	cout << endl;
+	drawNinja();
+	n.showDamage();
+	n.showHp();
+
+	/*Logic();*/
+
+	return 0;
+}
